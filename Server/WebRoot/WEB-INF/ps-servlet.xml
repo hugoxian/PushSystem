@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tool="http://www.springframework.org/schema/tool" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-lazy-init="false">
+
+	<context:component-scan base-package="com.zcwl.ps.controller" />
+	<context:component-scan base-package="com.zcwl.ps.api" />
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<bean id="performanceInterceptor" class="com.zcwl.ps.interceptor.PerformanceInterceptor" />
+	<bean id="psInterceptor" class="com.zcwl.ps.interceptor.PSInterceptor">
+		<property name="mappingURL" value=".*/login\.do.*" />
+	</bean>
+	
+	<bean id="cdrInterceptor" class="com.zcwl.cdr.CdrInterceptor" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="performanceInterceptor" />
+				<ref bean="cdrInterceptor"/>
+				<ref bean="psInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/view">
+		</property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="locale">zh_CN</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
+		<property name="suffix">
+			<value>.ftl</value>
+		</property>
+	</bean>
+
+</beans>
