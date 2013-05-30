@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    name="buildXpush"
+    basedir="."
+    default="jarXpush" >
+
+    <property
+        name="buildwar.dest"
+        value="bin" />
+
+    <property
+        name="class.dir"
+        value="${buildwar.dest}/classes" />
+
+    <property
+        name="xpush.jar.name"
+        value="xpush.jar" />
+
+    <target
+        name="jarXpush"
+        depends="" >
+
+        <delete file="${xpush.jar.name}" />
+
+        <jar destfile="${xpush.jar.name}" >
+
+            <fileset
+                dir="${class.dir}"
+                includes="com/xpush/android/**" />
+        </jar>
+    </target>
+
+</project>

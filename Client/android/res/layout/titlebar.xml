@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/titlebar_bg" >
+
+    <ImageButton
+        android:id="@+id/functionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/function_btn"
+        android:padding="5dip" />
+
+    <TextView
+        android:id="@+id/topBarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:shadowColor="#ff404040"
+        android:shadowDx="1.2"
+        android:shadowDy="1.2"
+        android:shadowRadius="1.0"
+        android:textColor="#ffffff"
+        android:textSize="19.0dip" />
+
+    <ImageButton
+        android:id="@+id/settingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:background="@drawable/setting_btn"
+        android:padding="5dip" />
+
+</RelativeLayout>

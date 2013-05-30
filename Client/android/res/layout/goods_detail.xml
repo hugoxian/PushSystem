@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/select_bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/titlebar" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/menu_bg"
+        android:padding="10dp"
+        android:src="@drawable/shop_no_pic" />
+
+    <TextView
+        android:id="@+id/goodsName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/goodsPrice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:text="价格：￥58.0"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/goodsContent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:lineSpacingExtra="2dp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/yel_btn"
+        android:gravity="center"
+        android:text="购买"
+        android:textColor="@color/white"
+        android:textSize="16sp" >
+    </Button>
+
+</LinearLayout>

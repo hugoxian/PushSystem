@@ -1,0 +1,71 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/functionView"
+    android:layout_width="160dp"
+    android:layout_height="159dp"
+    android:layout_gravity="center" >
+
+    <RelativeLayout
+        android:id="@+id/homeLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left" >
+
+        <ImageButton
+            android:id="@+id/homeMenu1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_menu_bg_1"
+            android:src="@drawable/home_menu_1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/homeHistroy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right" >
+
+        <ImageButton
+            android:id="@+id/homeMenu2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_menu_bg_2"
+            android:src="@drawable/home_menu_2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/homeBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left" >
+
+        <ImageButton
+            android:id="@+id/homeMenu3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_menu_bg_3"
+            android:src="@drawable/home_menu_3" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/homeDefences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right" >
+
+        <ImageButton
+            android:id="@+id/homeMenu4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_menu_bg_4"
+            android:src="@drawable/home_menu_4" />
+    </RelativeLayout>
+    
+    <ImageButton
+        android:id="@+id/homeLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:src="@drawable/home_logo_btn" />
+
+</FrameLayout>
