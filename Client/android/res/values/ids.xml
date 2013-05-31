@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item name="menu_location_id" type="id"/>
-    <item name="menu_msg_id" type="id"/>
-    <item name="menu_personal_id" type="id"/>
-    <item name="menu_shop_id" type="id"/>
-
-</resources>
