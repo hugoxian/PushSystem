@@ -1,7 +1,7 @@
 package com.xpush.android.xptp.dto;
 
 /**
- * 
+ * 登陆信息实体
  * @author hugo
  * 
  */

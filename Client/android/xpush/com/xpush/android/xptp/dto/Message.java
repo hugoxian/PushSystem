@@ -1,7 +1,7 @@
 package com.xpush.android.xptp.dto;
 
-
 /**
+ * 消息实体
  * 
  * @author hugo
  * 
@@ -43,6 +43,5 @@ public class Message extends Packet {
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
-
 
 }

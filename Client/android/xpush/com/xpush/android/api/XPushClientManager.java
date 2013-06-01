@@ -18,7 +18,7 @@ import com.xpush.android.service.MessageService;
 import com.xpush.android.xptp.dto.Message;
 
 /**
- * 
+ * XPushClientManager
  * @author hugo
  * 
  */

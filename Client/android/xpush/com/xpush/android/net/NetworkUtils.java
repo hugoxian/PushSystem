@@ -4,6 +4,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo.State;
 
+/**
+ * 网络相关的一些工具方法
+ * 
+ * @author hugo
+ * 
+ */
 public class NetworkUtils {
 
 	public static final int NONETWORK = 0;

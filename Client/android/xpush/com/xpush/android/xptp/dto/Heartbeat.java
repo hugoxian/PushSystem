@@ -1,12 +1,16 @@
 package com.xpush.android.xptp.dto;
 
 /**
+ * 心跳发送信息实体
  * 
  * @author hugo
  * 
  */
 public class Heartbeat extends Packet {
-
+	
+	/**
+	 * 
+	 */
 	private String appkey;
 	private String deviceId;
 

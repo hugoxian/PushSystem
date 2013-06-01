@@ -16,6 +16,7 @@ import com.xpush.android.xptp.dto.Packet;
 import com.xpush.android.xptp.dto.Result;
 
 /**
+ * 消息接受管理者
  * 
  * @author hugo
  * 
