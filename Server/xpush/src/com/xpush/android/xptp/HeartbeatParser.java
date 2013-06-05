@@ -4,7 +4,7 @@ import com.xpush.android.xptp.dto.Packet;
 import com.xpush.android.xptp.dto.Result;
 
 /**
- * 
+ * 心跳包解析器
  * @author hugo
  *
  */
