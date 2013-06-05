@@ -21,6 +21,12 @@ public class ResultParser extends XPTPParser {
 		}
 	}
 
+	/**
+	 * 结果监听器
+	 * 
+	 * @author hugo
+	 * 
+	 */
 	public interface ResultListener {
 		public void handle(Result result);
 	}
