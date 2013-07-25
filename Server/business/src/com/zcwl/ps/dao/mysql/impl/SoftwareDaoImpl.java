@@ -34,10 +34,20 @@ public class SoftwareDaoImpl implements SoftwareDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	private static final String SQL_add = "INSERT PS_SOFTWARE(appKey,name,nameEn,packageName,iconUrl,createDate,operatorId)VALUES(?,?,?,?,?,?,?)";
+	private static final String SQL_selectId = "SELECT id FROM PS_SOFTWARE WHERE appKey=?";
+
 	@Override
 	public SoftwareDto add(SoftwareDto software) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		this.jdbcTemplate.update(SQL_add,
+				new Object[] { software.getAppKey(), software.getName(),
+						software.getNameEn(), software.getPackageName(),
+						software.getIconUrl(), software.getCreateDate(),
+						software.getOperatorId() });
+		int id = this.jdbcTemplate.queryForInt(SQL_selectId,
+				new Object[] { software.getAppKey() });
+		software.setId(id);
+		return software;
 	}
 
 	@Override
@@ -52,10 +62,12 @@ public class SoftwareDaoImpl implements SoftwareDao {
 
 	}
 
+	private static final String SQL_update = "UPDATE PS_SOFTWARE SET status=? , name=? , packageName=? WHERE id=?";
 	@Override
 	public void update(SoftwareDto software) throws Exception {
-		// TODO Auto-generated method stub
-
+		this.jdbcTemplate.update(SQL_update,
+				new Object[] { software.getStatus(), software.getName(),
+						software.getPackageName(), software.getId() });
 	}
 
 	private static final String SQL_getAllSoftwares = "SELECT * FROM PS_SOFTWARE";
@@ -79,9 +91,11 @@ public class SoftwareDaoImpl implements SoftwareDao {
 	}
 
 	private static final String SQL_getOpertorIdByAppKey = "SELECT operatorId FROM PS_SOFTWARE WHERE appKey=?";
+
 	@Override
 	public int getOpertorIdByAppKey(String appKey) throws Exception {
-		return this.jdbcTemplate.queryForInt(SQL_getOpertorIdByAppKey,new Object[]{appKey});
+		return this.jdbcTemplate.queryForInt(SQL_getOpertorIdByAppKey,
+				new Object[] { appKey });
 	}
 
 }

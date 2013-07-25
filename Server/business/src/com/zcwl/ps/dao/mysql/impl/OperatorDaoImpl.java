@@ -36,10 +36,19 @@ public class OperatorDaoImpl implements OperatorDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	private static final String SQL_add = "INSERT PS_OPERATOR(name,account,password,roleId,createDate,email,phone)VALUES(?,?,?,?,?,?,?)";
+	private static final String SQL_selectId ="SELECT id FROM PS_OPERATOR WHERE account=?";
 	@Override
 	public OperatorDto add(OperatorDto operator) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		this.jdbcTemplate.update(
+				SQL_add,
+				new Object[] { operator.getName(), operator.getAccount(),
+						operator.getPassword(), operator.getRoleId(),
+						operator.getCreateDate(), operator.getEmail(),
+						operator.getPhone() });
+		int id = this.jdbcTemplate.queryForInt(SQL_selectId,new Object[]{operator.getAccount()});
+		operator.setId(id);
+		return operator;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.zcwl.ps.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import com.zcwl.ps.bo.AuthMananger;
 import com.zcwl.ps.dto.NodeDto;
 import com.zcwl.ps.dto.OperatorDto;
 import com.zcwl.ps.dto.RoleDto;
+import com.zcwl.tool.MD5Util;
 
 /**
  * 系统管理相关的Controller
@@ -65,6 +67,42 @@ public class SystemController {
 		}
 
 		return "system/operatersInfo";
+	}
+
+	@RequestMapping("/system/addOperater.do")
+	public String addOperater(ModelMap model, HttpSession session,
+			String account, String password) {
+		int result = 0;
+		try {
+			List<OperatorDto> operators = this.authMananger.getAllOperators();
+			boolean isExist = false;
+			for (OperatorDto operator : operators) {
+				if (operator.getAccount().equals(account)) {
+					isExist = true;
+					break;
+				}
+			}
+			//如果已经存在该用户名称
+			if (isExist) {
+				result = 1;
+			}else{
+				OperatorDto operator = new OperatorDto();
+				operator.setAccount(account);
+				operator.setPassword(MD5Util.getMD5String(password));
+				operator.setCreateDate(new Date());
+				operator.setName(account);
+				//现固定只能添加程序注册者角色的操作者
+				operator.setRoleId(2);
+				this.authMananger.addOperator(operator);
+			}
+
+		} catch (Exception e) {
+			result=2;
+			LOG.error("Add Operator infor error:", e);
+		}
+
+		model.addAttribute("result", result);
+		return "common/result";
 	}
 
 	/**

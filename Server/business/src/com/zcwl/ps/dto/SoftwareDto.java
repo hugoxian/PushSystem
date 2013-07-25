@@ -1,7 +1,7 @@
 package com.zcwl.ps.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 软件实体

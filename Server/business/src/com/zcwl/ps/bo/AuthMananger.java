@@ -18,6 +18,7 @@ import com.zcwl.ps.dto.NodeDto;
 import com.zcwl.ps.dto.OperatorDto;
 import com.zcwl.ps.dto.RoleDto;
 import com.zcwl.ps.dto.SoftwareDto;
+import com.zcwl.tool.StringUtil;
 
 /**
  * 
@@ -116,6 +117,24 @@ public class AuthMananger {
 	}
 
 	/**
+	 * 新增一个操作者
+	 * 
+	 * @param operator
+	 * @throws Exception
+	 */
+	public void addOperator(OperatorDto operator) throws Exception {
+		this.operatorDao.add(operator);
+		this.getAllOperators().add(operator);
+		// 设置角色
+		for (RoleDto role : this.getAllRoles()) {
+			if (operator.getRoleId() == role.getId()) {
+				operator.setRole(role);
+				break;
+			}
+		}
+	}
+
+	/**
 	 * 取得所有操作者信息，包括所属角色，节点权限等信息
 	 * 
 	 * @return
@@ -166,6 +185,52 @@ public class AuthMananger {
 	}
 
 	/**
+	 * 新增应用
+	 * 
+	 * @param operator
+	 * @param software
+	 * @throws Exception
+	 */
+	public void addSoftware(OperatorDto operator, SoftwareDto software)
+			throws Exception {
+		software.setOperatorId(operator.getId());
+		software.setAppKey(StringUtil.generateUuid());
+		software.setCreateDate(new Date());
+
+		this.softwareDao.add(software);
+
+		// 如果列表List为空，则新建一个
+		if (operator.getSoftwares() == null) {
+			operator.setSoftwares(new ArrayList<SoftwareDto>());
+		}
+
+		operator.getSoftwares().add(software);
+	}
+
+	/**
+	 * 更新应用
+	 * 
+	 * @param operator
+	 * @param software
+	 */
+	public void updateSoftware(OperatorDto operator, SoftwareDto software)
+			throws Exception {
+		// 更新数据库信息
+		this.softwareDao.update(software);
+		List<SoftwareDto> softwares = operator.getSoftwares();
+		if (softwares != null) {
+			// 更新缓存信息
+			for (SoftwareDto temp : softwares) {
+				if (temp.getId() == software.getId()) {
+					temp.setName(software.getName());
+					temp.setPackageName(software.getPackageName());
+					temp.setStatus(software.getStatus());
+				}
+			}
+		}
+	}
+
+	/**
 	 * 登录
 	 * 
 	 * @param account
@@ -199,14 +264,14 @@ public class AuthMananger {
 			throws Exception {
 		return this.softwareDao.getSoftwaresByOperatorId(operatorId);
 	}
-	
+
 	/**
 	 * 
 	 * @param appKey
 	 * @return
 	 * @throws Exception
 	 */
-	public int getOpertorIdByAppKey(String appKey) throws Exception{
+	public int getOpertorIdByAppKey(String appKey) throws Exception {
 		return this.softwareDao.getOpertorIdByAppKey(appKey);
 	}
 

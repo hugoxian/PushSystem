@@ -26,6 +26,7 @@ public class PushTaskDto implements Serializable {
 	public final static int CHANNEL_API = 0;
 	public final static int CHANNEL_WEB = 1;
 	public final static int CHANNEL_SOCKET = 2;
+	public final static int CHANNEL_SYSTEM=3;
 
 	/**
 	 * 
