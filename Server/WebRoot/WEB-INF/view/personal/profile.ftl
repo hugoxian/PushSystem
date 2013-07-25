@@ -3,13 +3,80 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<link href="../css/index.css" rel="Stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery-1.8.1.min.js"></script>
 <style type="text/css">
 .profileItem{
 	margin-bottom:10px;
 }
+#new_win{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+}
+#new_area{
+	margin: 0 auto;
+	width:320px;
+	height:300px;
+	background:#F9F9F9;
+	border:1px solid #dddddd;
+	margin-top: 50px;
+	padding:20px;
+}
+#tipsArea {
+	padding:10px;
+	color: red;
+}
 </style>
+
+<script type="text/javascript">
+function go2add(){
+	$("#new_win").show();
+}
+function back(){
+	$("#new_win").hide();
+}
+function add(){
+	$("#tipsArea").hide();
+	var softWareName = $("#softWareName").val();
+	softWareName = jQuery.trim(softWareName);
+	if ("" == softWareName) {
+		$("#tipsArea").html("请输入程序名称！");
+		$("#tipsArea").show();
+		return;
+	}
+
+	var packageName = $("#packageName").val();
+	packageName = jQuery.trim(packageName);
+
+	if ("" == packageName) {
+		$("#tipsArea").html("请输入包名称！");
+		$("#tipsArea").show();
+		return;
+	}
+	
+	
+	$.post("addSoftware.do", {
+		softWareName : softWareName,
+		packageName : packageName
+	},function(data) {
+				if ("0" == data) {
+					window.open("profile.do","content");
+				} else if ("1" == data) {
+					$("#tipsArea").html("暂只支持一个用户一个应用！");
+					$("#tipsArea").show();
+				} else if ("2" == data) {
+					$("#tipsArea").html("服务器繁忙，请稍后再试！");
+					$("#tipsArea").show();
+				}
+			});
+}
+</script>
+
 </head>
-<body>
+<body onload="back();">
 	<div class="commonBody">
 		<a href='#' class='linkbutton' onClick="del()" style="margin-right:10px;"><span>编辑个人资料</span> </a>
 		<hr/>
@@ -23,7 +90,7 @@
 		</#if>
 		<hr/>
 		<div style="height:10px;"></div>
-		<a href='#' class='linkbutton' onClick="del()" style="margin-right:10px;"><span>新增程序</span> </a>
+		<a href='#' class='linkbutton' onClick="go2add()" style="margin-right:10px;"><span>新增程序</span> </a>
 		<hr/>
 		<div style="height:10px;"></div>
 		<table class="gridtable">
@@ -41,11 +108,28 @@
 			</#if>
 			
 			<tr>
-			    <td>${software.appKey}</td><td>${software.name}</td><td>${software.packageName!""}</td><td>${statusStr}</td><td>${dateUtil.formatDate2String(software.getCreateDate())}</td><td><img src="images/detail.png" style="margin-right:20px;"/><img src="images/delete.png"/></td>
+			    <td>${software.appKey}</td><td>${software.name}</td><td>${software.packageName!""}</td><td>${statusStr}</td><td>${dateUtil.formatDate2String(software.getCreateDate())}</td><td><img src="../images/detail.png" style="margin-right:20px;"/><img src="../images/delete.png"/></td>
 			</tr>
 			</#list>
 			</#if>
 		</table>
+	</div>
+	
+	<div id="new_win">
+		<div id='new_area'>
+			<form id="pushForm" action="xxxx.do" method="post">
+				<div style="text-align: center;font-size:14px;font-weight:bold;">
+					新建程序
+				</div>
+	   			<div>程序名称：　<input  type="text" name="softWareName" id="softWareName" style="border: solid 1px #000000; padding: 1px; width: 240px;height:30px;margin-top:20px;"/> </div>
+	   			<div>包名称　：　<input  type="text" name="packageName" id="packageName" style="border: solid 1px #000000; padding: 1px; width: 240px;height:30px;margin-top:20px;"/> </div>
+	   			<div style="width: 100%;margin-top:50px;">
+				<a href='#' class='linkbutton' onClick="add()" style="margin-right:80px;"><span>　提　交　</span> </a>
+				<a href='#' class='linkbutton' onClick="back()" style="margin-right:10px;"><span>　取　消　</span> </a>
+				</div>
+				<div id="tipsArea"></div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

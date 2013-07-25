@@ -3,12 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<link href="../css/index.css" rel="Stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery-1.8.1.min.js"></script>
 <style type="text/css">
 
 </style>
 <script type="text/javascript">
 function kick(id){
-	var uri = "server/kick.do";
+	var uri = "kick.do";
 	$.post(uri, {
 		id : id
 	}, function(data) {

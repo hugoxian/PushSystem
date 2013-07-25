@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<link href="../css/index.css" rel="Stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery-1.8.1.min.js"></script>
 <style type="text/css">
 #tipsArea {
 	color: red;
@@ -22,7 +24,7 @@
 		
 		$("#tipsArea").html("");
 		
-		$.post("push/pushGroupMsg.do", {message : message,type:type,title:title},
+		$.post("pushGroupMsg.do", {message : message,type:type,title:title},
 			function(data) {
 				if ("0" == data) {
 					$("#tipsArea").html("<span style='color:#000000;'>发送成功！</span>");
@@ -43,7 +45,7 @@
 	   			<input type="radio" id="groupType" name="groupType" value="2" />所有用户
    			</div>
    			<div>标 题：<input  type="text" name="title" id="title" style="border: solid 1px #000000; padding: 1px; width: 350px;margin-top:10px;"/> </div>
-   			<div style="margin-top:10px;margin-bottom:10px;" >内 容：<textarea name="message" id="message" cols ="50" rows = "5" style="border: solid 1px #000000; padding: 1px; width: 350px;"/></div>
+   			<div style="margin-top:10px;margin-bottom:10px;" >内 容：<textarea name="message" id="message" cols ="50" rows = "5" style="border: solid 1px #000000; padding: 1px; width: 350px;"></textarea></div>
 			<div style="margin-bottom:10px;">注:消息标题不超过32个字，内容不超过140个字</div>
 			<a href='#' class='linkbutton' onClick="groupSend()" style="margin-right:10px;"><span>发送</span> </a>
 		</form>

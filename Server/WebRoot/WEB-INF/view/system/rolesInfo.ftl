@@ -3,18 +3,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<link href="../css/index.css" rel="Stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery-1.8.1.min.js"></script>
 <style type="text/css">
 
 </style>
+<script type="text/javascript">
+	function go2add(){
+		alert("暂不支持新增角色！");
+	}
+</script>
 </head>
 <body>
 	<div class="commonBody">
-		<a href='#' class='linkbutton' onClick="del()" style="margin-right:10px;"><span>新增角色</span> </a>
+		<a href='#' class='linkbutton' onClick="go2add()" style="margin-right:10px;"><span>新增角色</span> </a>
 		<hr/>
 		<div style="height:10px;"></div>
 		<table class="gridtable">
 			<tr>
-			    <th>ID</th><th>角色名称</th><th>备注</th><th>状态</th><th>创建时间</th><th>操作</th>
+			    <th>角色名称</th><th>备注</th><th>状态</th><th>创建时间</th><th>操作</th>
 			</tr>
 			<#if roles?exists>
 			<#list roles as role>
@@ -23,7 +30,7 @@
 				<#if role.status!=0>
 				<#assign statusStr="无效" />
 				</#if>
-			    <td>${role.id}</td><td <#if role.status!=0>style="color:red;"</#if>>${role.name}</td><td>${role.desc}</td><td>${statusStr}</td><td>${role.createDate}</td><td><img src="images/detail.png" style="margin-right:20px;"/><img src="images/delete.png" style="margin-right:20px;"/><img src="images/limit.png"/></td>
+			    <td <#if role.status!=0>style="color:red;"</#if>>${role.name}</td><td>${role.desc}</td><td>${statusStr}</td><td>${role.createDate}</td><td><img src="../images/detail.png" style="margin-right:20px;"/><img src="../images/delete.png" style="margin-right:20px;"/><img src="../images/limit.png"/></td>
 			</tr>
 			</#list>
 			</#if>
