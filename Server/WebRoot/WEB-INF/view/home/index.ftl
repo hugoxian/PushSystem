@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<title>推送系统</title> 
+			<title>推送平台</title> 
 			<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 			<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 			<script type="text/javascript" src="js/index.js"></script>

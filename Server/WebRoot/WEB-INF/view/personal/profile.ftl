@@ -29,6 +29,29 @@
 	padding:10px;
 	color: red;
 }
+
+#update_win{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+}
+#update_area{
+	margin: 0 auto;
+	width:320px;
+	height:300px;
+	background:#F9F9F9;
+	border:1px solid #dddddd;
+	margin-top: 50px;
+	padding:20px;
+}
+
+#tipsArea_up {
+	padding:10px;
+	color: red;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -37,6 +60,7 @@ function go2add(){
 }
 function back(){
 	$("#new_win").hide();
+	$("#update_win").hide();
 }
 function add(){
 	$("#tipsArea").hide();
@@ -73,6 +97,55 @@ function add(){
 				}
 			});
 }
+
+function go2update(id,status,softwareName,packageName){
+	$("#update_win").show();
+	$("#softWareName_up").val(softwareName);
+	$("#packageName_up").val(packageName);
+	$("#id_up").val(id);
+	$("#status_up").val(status);
+}
+
+function update(){
+	$("#tipsArea_up").hide();
+	var softWareName = $("#softWareName_up").val();
+	softWareName = jQuery.trim(softWareName);
+	if ("" == softWareName) {
+		$("#tipsArea_up").html("请输入程序名称！");
+		$("#tipsArea_up").show();
+		return;
+	}
+
+	var packageName = $("#packageName_up").val();
+	packageName = jQuery.trim(packageName);
+
+	if ("" == packageName) {
+		$("#tipsArea_up").html("请输入包名称！");
+		$("#tipsArea_up").show();
+		return;
+	}
+	
+	var id = $("#id_up").val();
+	var status = $("#status_up").val();
+	
+	$.post("updateSoftware.do", {
+		id : id,
+		status : status,
+		softWareName : softWareName,
+		packageName : packageName
+	},function(data) {
+				if ("0" == data) {
+					window.open("profile.do","content");
+				} else if ("1" == data) {
+					$("#tipsArea").html("暂只支持一个用户一个应用！");
+					$("#tipsArea").show();
+				} else if ("2" == data) {
+					$("#tipsArea").html("服务器繁忙，请稍后再试！");
+					$("#tipsArea").show();
+				}
+			});
+}
+
 </script>
 
 </head>
@@ -108,7 +181,7 @@ function add(){
 			</#if>
 			
 			<tr>
-			    <td>${software.appKey}</td><td>${software.name}</td><td>${software.packageName!""}</td><td>${statusStr}</td><td>${dateUtil.formatDate2String(software.getCreateDate())}</td><td><img src="../images/detail.png" style="margin-right:20px;"/><img src="../images/delete.png"/></td>
+			    <td>${software.appKey}</td><td>${software.name}</td><td>${software.packageName!""}</td><td>${statusStr}</td><td>${dateUtil.formatDate2String(software.getCreateDate())}</td><td><a href="#" ><img src="../images/detail.png" onClick="go2update(${software.id},${software.status},'${software.name}','${software.packageName!""}')" style="margin-right:20px;"/></a><img src="../images/delete.png"/></td>
 			</tr>
 			</#list>
 			</#if>
@@ -128,6 +201,30 @@ function add(){
 				<a href='#' class='linkbutton' onClick="back()" style="margin-right:10px;"><span>　取　消　</span> </a>
 				</div>
 				<div id="tipsArea"></div>
+			</form>
+		</div>
+	</div>
+	
+	<div id="update_win">
+		<div id='update_area'>
+			<form id="pushForm" action="xxxx.do" method="post">
+				<div style="text-align: center;font-size:14px;font-weight:bold;">
+					更新程序信息
+				</div>
+				<input type="hidden" id="id_up" />
+	   			<div>程序名称：　<input  type="text" name="softWareName_up" id="softWareName_up" style="border: solid 1px #000000; padding: 1px; width: 240px;height:30px;margin-top:20px;"/> </div>
+	   			<div>包名称　：　<input  type="text" name="packageName_up" id="packageName_up" style="border: solid 1px #000000; padding: 1px; width: 240px;height:30px;margin-top:20px;"/> </div>
+	   			<div style="height:30px;margin-top:20px;">状　　态：　
+		   			<select name="status_up" id="status_up" style="height:30px;width:240px;padding:0px;">  
+				        <option value="0">有效</option>  
+				        <option value="1">无效</option>  
+			        </select>
+		        </div>
+	   			<div style="width: 100%;margin-top:50px;">
+				<a href='#' class='linkbutton' onClick="update()" style="margin-right:80px;"><span>　更　新　</span> </a>
+				<a href='#' class='linkbutton' onClick="back()" style="margin-right:10px;"><span>　取　消　</span> </a>
+				</div>
+				<div id="tipsArea_up"></div>
 			</form>
 		</div>
 	</div>

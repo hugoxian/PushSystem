@@ -9,6 +9,13 @@
 #tipsArea {
 	color: red;
 }
+.input_class{
+	background: #fff;
+	border: solid 1px #C7C7C7; 
+	padding: 1px; 
+	width: 350px;
+	height:30px;
+}
 </style>
 <script type="text/javascript">
 	function groupSend() {
@@ -44,8 +51,8 @@
 				<input type="radio" id="groupType" name="groupType" value="1" checked />所有在线用户
 	   			<input type="radio" id="groupType" name="groupType" value="2" />所有用户
    			</div>
-   			<div>标 题：<input  type="text" name="title" id="title" style="border: solid 1px #000000; padding: 1px; width: 350px;margin-top:10px;"/> </div>
-   			<div style="margin-top:10px;margin-bottom:10px;" >内 容：<textarea name="message" id="message" cols ="50" rows = "5" style="border: solid 1px #000000; padding: 1px; width: 350px;"></textarea></div>
+   			<div>标 题：　<input  type="text" name="title" id="title" class = "input_class" style="margin-top:20px;"/> </div>
+   			<div style="margin-top:20px;margin-bottom:20px;" >内 容：　<textarea name="message" id="message" cols ="50" rows = "5" class="input_class" style="height:80px;"></textarea></div>
 			<div style="margin-bottom:10px;">注:消息标题不超过32个字，内容不超过140个字</div>
 			<a href='#' class='linkbutton' onClick="groupSend()" style="margin-right:10px;"><span>发送</span> </a>
 		</form>

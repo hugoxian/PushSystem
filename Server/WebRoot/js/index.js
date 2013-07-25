@@ -15,7 +15,7 @@ function Node(id, parentId, name, sequence, uri, subNodes) {
 		var subNodesdiv = "<div id='subNodeArea"+id+"' class='subNodeNormal'>";
 		for ( var i = 0; i < subNodes.length; i++) {
 			var subTemp = escape(subNodes[i].name);
-			var lidiv = "<div class='subNodeItem'><img src='images/right.png' id='subNode"+subNodes[i].id+"'/><a href='#second_layer_node_"+subTemp+"' onClick='loadContent(\""+subNodes[i].uri+"\")'>"+subNodes[i].name+"</a></div>";
+			var lidiv = "<div class='subNodeItem'><img src='images/right.png' id='subNode"+subNodes[i].id+"'/><a href='"+subNodes[i].uri+"' target='content'>"+subNodes[i].name+"</a></div>";
 			subNodesdiv=subNodesdiv+lidiv;
 		}
 		subNodesdiv = subNodesdiv+"</div>";
@@ -27,7 +27,7 @@ function Node(id, parentId, name, sequence, uri, subNodes) {
 function clickNode(id){
 	for(var i=0;i<nodes.length;i++) {
 		if(nodes[i].id==id){
-			loadContent(nodes[i].subNodes[0].uri);
+			window.open(nodes[i].subNodes[0].uri,"content");
 			$('#subNodeArea'+id).show("800");
 		}else{
 			$('#subNodeArea'+nodes[i].id).hide();
@@ -74,7 +74,7 @@ function init() {
 			var firstId = nodes[0].id;
 			$('#subNodeArea'+firstId).show("800");
 			
-			loadContent(nodes[0].subNodes[0].uri);
+			window.open(nodes[0].subNodes[0].uri,"content");
 		}
 	});
 }
@@ -87,7 +87,8 @@ function loadContent(uri){
 		if("777"==resultCode){
 			window.location.href = "index.html";
 		}else{
-			$('#rightSideBarArea').html(data);	
+			var temp = $('#rightSideBarArea').html();
+			$('#rightSideBarArea').html(data+temp);	
 		}
 	});
 }
