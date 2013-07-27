@@ -27,8 +27,7 @@
         android:name=".XpushExampleApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:label="@string/app_name" >
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait" >
@@ -44,7 +43,7 @@
         <!-- 个人应用配置 -->
         <meta-data
             android:name="XPUSH_APPKEY"
-            android:value="6bdc4fccfdcdc811a202d0278375f408" />
+            android:value="717b96004e6d4a95aac79c32efd10ea0" />
 
         <!-- XPush 关键配置 -->
         <service

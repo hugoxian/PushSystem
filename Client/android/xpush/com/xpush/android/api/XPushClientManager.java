@@ -43,14 +43,19 @@ public class XPushClientManager {
 	public final static String CLIENT_DEVICEID = "XPUSH_CLIENT_DEVICEID";
 
 	public static String registerMsgId;
+	
+	public static String xmppHost = "183.238.0.50";
 
 	/**
 	 * 初始化服务
 	 * 
 	 * @param context
 	 */
-	public static void init(Context context) {
+	public static void init(Context context,String host) {
 		mContext = context;
+		if(host!=null){
+			xmppHost = host;
+		}
 		// 发送广播
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.setAction(ACTION_ALARM_RECEIVED);

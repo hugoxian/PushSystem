@@ -29,6 +29,7 @@ public class MyMessageReceiver extends BroadcastReceiver{
 		if (XPushClientManager.ACTION_MESSAGE_RECEIVED.equals(intent
 				.getAction())) {
 			showNotification(context, intent);
+			System.out.println("This new Msg Comeing!");
 		}
 	}
 	

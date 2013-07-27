@@ -22,7 +22,7 @@ public class XpushExampleApplication extends Application {
 		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 		// 初始化服务（建议在Application中初始化，也可以在Activity中初始化）
-		XPushClientManager.init(this);
+		XPushClientManager.init(this,"192.168.1.55");
 		// 设置程序自定义Notification接收器
 		XPushClientManager.setReceiver(MyMessageReceiver.class);
 	}

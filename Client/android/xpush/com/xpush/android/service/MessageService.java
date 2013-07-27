@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.xpush.android.api.XPushClientManager;
 import com.xpush.android.api.XPushIncomeManager;
 import com.xpush.android.net.ConnectionConfig;
 import com.xpush.android.net.NetworkUtils;
@@ -37,7 +38,7 @@ public class MessageService extends Service {
 	@Override
 	public void onCreate() {
 		Log.i(TAG, "onCreate");
-		config = new ConnectionConfig("192.168.1.55", 5222);
+		config = new ConnectionConfig(XPushClientManager.xmppHost, 5888);
 		connection = new XPushConnection(config);
 
 		IncomeMessageListener incomeMessageListener = new XPushIncomeManager();
