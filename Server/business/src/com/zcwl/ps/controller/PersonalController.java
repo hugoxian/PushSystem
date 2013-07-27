@@ -113,13 +113,14 @@ public class PersonalController {
 	 */
 	@RequestMapping("/personal/updateSoftware.do")
 	public String updateSoftware(ModelMap model, HttpSession session,
-			String softWareName, String packageName,int id,int status){
+			String softWareName, String packageName,int id,int status,String welcomeMsg){
 		int result = 0;
 		SoftwareDto software = new SoftwareDto();
 		software.setId(id);
 		software.setStatus(status);
 		software.setName(softWareName);
 		software.setPackageName(packageName);
+		software.setWelcomeMsg(welcomeMsg);
 		
 		OperatorDto operator = (OperatorDto) session
 				.getAttribute(Constants.OPERATOR);

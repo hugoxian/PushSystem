@@ -13,12 +13,12 @@
 	<div class="commonBody">
 		<table class="gridtable">
 			<tr>
-			    <th>设备ID</th><th>UA</th><th>经纬度</th><th>创建时间</th><th>最后访问时间</th><th>状态</th><th>操作</th>
+			    <th>设备ID</th><th>UA</th><th>经纬度</th><th>创建时间</th><th>最后访问时间</th><th>状态</th>
 			</tr>
 			<#if clients?exists&&(clients?size>0)>
 				<#list clients as client>
 				<tr>
-				    <td>${client.deviceId!""}</td><td>${client.userAgent!""}</td><td>${client.lastLatLon!""}</td><td>${dateUtil.formatDate2String2(client.getCreateDate())}</td><td>${dateUtil.formatDate2String2(client.getLastAccessTime())}</td><td>正常</td><td><a href="#">下线</a></td>
+				    <td>${client.deviceId!""}</td><td>${client.userAgent!""}</td><td>${client.lastLatLon!""}</td><td>${dateUtil.formatDate2String2(client.getCreateDate())}</td><td>${dateUtil.formatDate2String2(client.getLastAccessTime())}</td><td>正常</td>
 				</tr>
 				</#list>
 			<#else>

@@ -225,6 +225,7 @@ public class AuthMananger {
 					temp.setName(software.getName());
 					temp.setPackageName(software.getPackageName());
 					temp.setStatus(software.getStatus());
+					temp.setWelcomeMsg(software.getWelcomeMsg());
 				}
 			}
 		}

@@ -64,12 +64,21 @@ public interface SoftwareDao {
 			throws Exception;
 
 	/**
-	 * 去的操作员的ID
+	 * 取得操作员的ID
 	 * 
 	 * @param appKey
 	 * @return
 	 * @throws Exception
 	 */
 	public int getOpertorIdByAppKey(String appKey) throws Exception;
+
+	/**
+	 * 根据appkey取得Software实体
+	 * 
+	 * @param appKey
+	 * @return
+	 * @throws Exception
+	 */
+	public SoftwareDto getSoftwareByAppKey(String appKey) throws Exception;
 
 }

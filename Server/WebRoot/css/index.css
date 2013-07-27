@@ -179,8 +179,8 @@ table.gridtable {
 
 table.gridtable th {
 	border-width: 1px;
-	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #F5F5F5;
@@ -188,8 +188,8 @@ table.gridtable th {
 
 table.gridtable td {
 	border-width: 1px;
-	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;

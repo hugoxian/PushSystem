@@ -12,8 +12,11 @@ import com.xpush.android.xptp.LoginParser.LoginListener;
 import com.xpush.android.xptp.dto.Login;
 import com.zcwl.ps.dao.ClientDao;
 import com.zcwl.ps.dao.PushDao;
+import com.zcwl.ps.dao.SoftwareDao;
 import com.zcwl.ps.dto.ClientDto;
 import com.zcwl.ps.dto.PushRecordDto;
+import com.zcwl.ps.dto.PushTaskDto;
+import com.zcwl.ps.dto.SoftwareDto;
 
 @Service
 public class ClientLoginListener implements LoginListener {
@@ -23,7 +26,10 @@ public class ClientLoginListener implements LoginListener {
 
 	@Autowired(required = true)
 	private PushDao pushDao;
-	
+
+	@Autowired(required = true)
+	private SoftwareDao softwareDao;
+
 	@Autowired(required = true)
 	private PushManager pushManager;
 
@@ -41,7 +47,7 @@ public class ClientLoginListener implements LoginListener {
 				client.setLastLatLon(temp.getLonlat());
 				client.setLastAccessTime(now);
 				client.setUserAgent(temp.getUserAgent());
-
+				// 记录话单
 				try {
 					ClientDto fromDatabase = clientDao.getClientByKeyAndId(
 							client.getAppKey(), client.getDeviceId());
@@ -56,17 +62,37 @@ public class ClientLoginListener implements LoginListener {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
+				// 发送离线消息
 				try {
 					List<PushRecordDto> records = pushDao.getUnSendingRecords(
 							client.getAppKey(), client.getDeviceId());
 					if (records != null && records.size() > 0) {
-						pushManager.createMessageTask2Start(records, client.getAppKey(), new Date());
+						pushManager.createMessageTask2Start(records,
+								client.getAppKey(), new Date());
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
+				// 如果Software无效，则推送提示消息
+				try {
+					SoftwareDto software = softwareDao.getSoftwareByAppKey(temp
+							.getAppkey());
+					if (software.getStatus() != 0) {
+						PushTaskDto task = new PushTaskDto();
+						task.setType(PushTaskDto.TASK_SINGLE);
+						task.setOperatorId(0);
+						task.setAppKey(software.getAppKey());
+						task.setTitle(software.getName());
+						task.setChannel(PushTaskDto.CHANNEL_SYSTEM);
+						task.setContent(software.getWelcomeMsg());
+						task.setCreateDate(new Date());
+						// 默认即时发送
+						task.setSendTime(task.getCreateDate());
+						pushManager.createTask(task, temp.getDeviceId());
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}

@@ -13,7 +13,7 @@
 	<div class="commonBody">
 		<table class="gridtable">
 			<tr>
-			    <th>时间</th><th>接收者</th><th>标题</th><th>内容</th><th>推送方式</th><th>推送成功 / 满足条件</th><th>操作</th>
+			    <th>时间</th><th>接收者</th><th>标题</th><th>内容</th><th>推送方式</th><th>推送成功 / 满足条件</th>
 			</tr>
 			<#if tasks?exists>
 				<#list tasks as task>
@@ -35,10 +35,12 @@
 				
 				<#if task.channel==1>
 				<#assign channelStr = "WEB" />
+				<#elseif task.channel==3>
+				<#assign channelStr = "SYSTEM" />
 				</#if>
 				
 				<tr>
-				    <td>${dateUtil.formatDate2String2(task.getSendTime())}</td><td>${receiver}</td><td>${task.title}</td><td>${task.content}</td><td>${channelStr}</td><td>${task.finishCount} / ${task.count}</td><td><img src="../images/detail.png" style="margin-right:20px;"/><img src="../images/delete.png"/></td>
+				    <td>${dateUtil.formatDate2String2(task.getSendTime())}</td><td>${receiver}</td><td>${task.title}</td><td>${task.content}</td><td>${channelStr}</td><td>${task.finishCount} / ${task.count}</td>
 				</tr>
 				</#list>
 			<#else>

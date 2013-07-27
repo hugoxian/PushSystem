@@ -62,12 +62,12 @@ public class SoftwareDaoImpl implements SoftwareDao {
 
 	}
 
-	private static final String SQL_update = "UPDATE PS_SOFTWARE SET status=? , name=? , packageName=? WHERE id=?";
+	private static final String SQL_update = "UPDATE PS_SOFTWARE SET status=? , name=? , packageName=? , welcomeMsg=? WHERE id=?";
 	@Override
 	public void update(SoftwareDto software) throws Exception {
 		this.jdbcTemplate.update(SQL_update,
 				new Object[] { software.getStatus(), software.getName(),
-						software.getPackageName(), software.getId() });
+						software.getPackageName(),software.getWelcomeMsg(), software.getId() });
 	}
 
 	private static final String SQL_getAllSoftwares = "SELECT * FROM PS_SOFTWARE";
@@ -96,6 +96,14 @@ public class SoftwareDaoImpl implements SoftwareDao {
 	public int getOpertorIdByAppKey(String appKey) throws Exception {
 		return this.jdbcTemplate.queryForInt(SQL_getOpertorIdByAppKey,
 				new Object[] { appKey });
+	}
+
+	private static final String SQL_getSoftwareByAppKey = "SELECT * FROM PS_SOFTWARE WHERE appKey=?";
+	
+	@Override
+	public SoftwareDto getSoftwareByAppKey(String appKey) throws Exception {
+		return (SoftwareDto)this.jdbcTemplate.queryForObject(SQL_getSoftwareByAppKey, new Object[]{appKey},  new BeanPropertyRowMapper(
+						SoftwareDto.class));
 	}
 
 }

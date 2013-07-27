@@ -98,12 +98,13 @@ function add(){
 			});
 }
 
-function go2update(id,status,softwareName,packageName){
+function go2update(id,status,softwareName,packageName,welcomeMsg){
 	$("#update_win").show();
 	$("#softWareName_up").val(softwareName);
 	$("#packageName_up").val(packageName);
 	$("#id_up").val(id);
 	$("#status_up").val(status);
+	$("#welcomeMsg_up").val(welcomeMsg);
 }
 
 function update(){
@@ -127,12 +128,14 @@ function update(){
 	
 	var id = $("#id_up").val();
 	var status = $("#status_up").val();
+	var welcomeMsg=$("#welcomeMsg_up").val();
 	
 	$.post("updateSoftware.do", {
 		id : id,
 		status : status,
 		softWareName : softWareName,
-		packageName : packageName
+		packageName : packageName,
+		welcomeMsg : welcomeMsg
 	},function(data) {
 				if ("0" == data) {
 					window.open("profile.do","content");
@@ -180,8 +183,14 @@ function update(){
 			<#assign statusStr="无效" />
 			</#if>
 			
+			<#if software.welcomeMsg?exists>
+				<#assign welcomeMsg=software.welcomeMsg />
+			<#else>
+				<#assign welcomeMsg="" />
+			</#if>
+			
 			<tr>
-			    <td>${software.appKey}</td><td>${software.name}</td><td>${software.packageName!""}</td><td>${statusStr}</td><td>${dateUtil.formatDate2String(software.getCreateDate())}</td><td><a href="#" ><img src="../images/detail.png" onClick="go2update(${software.id},${software.status},'${software.name}','${software.packageName!""}')" style="margin-right:20px;"/></a><img src="../images/delete.png"/></td>
+			    <td>${software.appKey}</td><td>${software.name}</td><td>${software.packageName!""}</td><td>${statusStr}</td><td>${dateUtil.formatDate2String(software.getCreateDate())}</td><td><a href="#" ><img src="../images/detail.png" onClick="go2update(${software.id},${software.status},'${software.name}','${software.packageName!""}','${welcomeMsg}')" style="margin-right:20px;"/></a><img src="../images/delete.png"/></td>
 			</tr>
 			</#list>
 			</#if>
@@ -220,7 +229,9 @@ function update(){
 				        <option value="1">无效</option>  
 			        </select>
 		        </div>
-	   			<div style="width: 100%;margin-top:50px;">
+		        <div>提示语　：　<input  type="text" name="welcomeMsg_up" id="welcomeMsg_up" style="border: solid 1px #000000; padding: 1px; width: 240px;height:30px;margin-top:20px;"/> </div>
+		        
+	   			<div style="width: 100%;margin-top:30px;">
 				<a href='#' class='linkbutton' onClick="update()" style="margin-right:80px;"><span>　更　新　</span> </a>
 				<a href='#' class='linkbutton' onClick="back()" style="margin-right:10px;"><span>　取　消　</span> </a>
 				</div>

@@ -29,6 +29,8 @@ public class SoftwareDto implements Serializable {
 	private int status;
 	// 创建日期
 	private Date createDate;
+	//登陆欢迎语
+	private String welcomeMsg;
 
 	public int getId() {
 		return id;
@@ -100,6 +102,14 @@ public class SoftwareDto implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public String getWelcomeMsg() {
+		return welcomeMsg;
+	}
+
+	public void setWelcomeMsg(String welcomeMsg) {
+		this.welcomeMsg = welcomeMsg;
 	}
 
 }
